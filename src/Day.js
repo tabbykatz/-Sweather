@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Day = (date, day) => {
+const Day = ({date, day}) => {
     return <div>
-        <date>{date}</date>
-        <temp>{day.main.temp}</temp>
-        <icon><img src={day.icon} /></icon>
+        <span>{date}</span>
+        <div>{day.main.temp}</div>
+        <div><img src={day.icon} /></div>
     </div>
 }
 

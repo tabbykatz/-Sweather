@@ -12,21 +12,23 @@ const api = {
 function App() {
   let [query, setQuery] = useState('');
   let [weather, setWeather] = useState({});
-  let [location, setLocation] = useState("")
+  let [location, setLocation] = useState({})
   let [gotWeather, setGotWeather] = useState(false);
+    useEffect(() => console.log('render!'))
 
-
-  const search = evt => {
-    if (evt.key === "Enter") {
+ 
+  const search = (evt) => {
+    if (evt.key === 'Enter') {
       fetch(`${api.base}${query}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(data => {
-          setLocation(`${data.city.name}, ${data.city.country}`)
+          setLocation([location.city, location.country] = [data.city.name, data.city.country])
           setWeather(weather = forecastParser(data))
           console.log(weather || 'grrrr')
-          console.log(location || 'shite')
+          console.log(location.city || 'shite')
           //backgroundSwitcher()
-          setGotWeather(!gotWeather);
+          setGotWeather(gotWeather = true);
+          console.log(gotWeather)
     })
   }
 }
@@ -45,8 +47,8 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {gotWeather &&
-        <Forecast forecast={weather} /> }
+        { gotWeather ?
+        <Forecast forecast={weather} location={location} className='forecast' /> : ''}
       </main>
     </div>
   );
