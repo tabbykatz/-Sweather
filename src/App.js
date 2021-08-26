@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { backgroundSwitcher, forecastParser, dateBuilder } from './helpers';
-import Forecast from './Forecast';
 
 
 const api = {
@@ -10,48 +9,43 @@ const api = {
 
 
 function App() {
-  let [query, setQuery] = useState('');
-  let [weather, setWeather] = useState({});
-  let [location, setLocation] = useState({})
-  let [gotWeather, setGotWeather] = useState(false);
-    useEffect(() => console.log('render!'))
+  let [query, setQuery] = React.useState('');
+  let [weather, setWeather] = React.useState({});
+  
+  const shouldDisplayForecast = Object.keys(weather).length > 0;
+  console.log({weather, shouldDisplayForecast})
 
- 
-  const search = (evt) => {
-    if (evt.key === 'Enter') {
+  
+  const search = () => {
       fetch(`${api.base}${query}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(data => {
-          setLocation([location.city, location.country] = [data.city.name, data.city.country])
-          setWeather(weather = forecastParser(data))
-          console.log(weather || 'grrrr')
-          console.log(location.city || 'shite')
-          //backgroundSwitcher()
-          setGotWeather(gotWeather = true);
-          console.log(gotWeather)
+          setWeather(data)
     })
-  }
+}
+const onSubmit = (e) => {
+  e.preventDefault();
+  search()
 }
 
-
-  return (
+    return (
     <div className='app'>
       <main>
-        <div className="search-box">
+        <form onSubmit={onSubmit} className="search-box">
           <input 
             type="text"
             className="search-bar"
             placeholder="Enter a city name..."
             onChange={e => setQuery(e.target.value)}
             value={query}
-            onKeyPress={search}
           />
-        </div>
-        { gotWeather ?
-        <Forecast forecast={weather} location={location} className='forecast' /> : ''}
+        </form>
+        { shouldDisplayForecast ? 
+        <pre>{JSON.stringify(weather, null, 2)}</pre> : null }
       </main>
-    </div>
-  );
+    </div>)
+  
 }
+
 
 export default App;
