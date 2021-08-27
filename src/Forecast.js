@@ -1,20 +1,16 @@
-import * as React from "react";
-import Day from "./Day";
-
-function Forecast({ weather }) {
-  const days = Object.keys(weather);
-
-  const listItems = days.forEach((key) => {
-    return (
-      <Day
-        id={key}
-        temp={weather[key].temperature}
-        description={weather[key].description}
-        icon={weather[key].icon}
-      />
-    );
-  });
-  return <ul>{listItems}</ul>;
-}
+const Forecast = ({ forecast }) => (
+  <ul>
+    {Object.entries(forecast).map(
+      ([date, { temperature, description, icon }]) => (
+        <li key={date}>
+          <div>{date}</div>
+          <div>{Math.round(temperature)}°F</div>
+          <div>{description}</div>
+          <img src={icon} alt="weather info" />
+        </li>
+      )
+    )}
+  </ul>
+);
 
 export default Forecast;
