@@ -1,5 +1,5 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Besley&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+/* @import url("https://fonts.googleapis.com/css2?family=Besley&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee&display=swap");
 
 * {
   margin: 0;
@@ -8,19 +8,16 @@
 }
 
 body {
-  font-family: 'Besley', serif;
-}
-
-.app {
-  background-image: url('./assets/clouds.jpeg');
-  background-size: cover;
-  background-position: bottom;
-  transition: 0.4 ease;
+  font-family: "Besley", serif;
 }
 
 main {
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
   padding: 25px;
 }
 
@@ -51,7 +48,7 @@ main {
 }
 
 .location-box .location {
-  color: #FFF;
+  color: #fff;
   font-size: 2em;
   font-weight: 500;
   text-align: center;
@@ -59,8 +56,8 @@ main {
 }
 
 .location-box .date {
-  font-family: 'ABeeZee', sans-serif;
-  color: #FFF;
+  font-family: "ABeeZee", sans-serif;
+  color: #fff;
   font-size: 1.4em;
   font-weight: 300;
   font-style: italic;
@@ -79,7 +76,7 @@ main {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   padding: 15px 25px;
-  color: #FFF;
+  color: #fff;
   font-size: 5em;
   font-weight: 900;
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
@@ -88,7 +85,7 @@ main {
 }
 
 .weather-box .weather {
-  color: #FFF;
+  color: #fff;
   font-size: 2em;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
