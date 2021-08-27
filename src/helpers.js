@@ -2,6 +2,12 @@ export const responseParser = (data) => {
   const api = {
     base: "http://openweathermap.org/img/wn/",
   };
+
+  const toDate = (datestring) => {
+    const options = { weekday: "long", month: "long", day: "numeric" };
+    return new Date(datestring).toLocaleDateString("en", options);
+  };
+
   let newState = {
     location: "",
     forecast: {},
@@ -12,7 +18,7 @@ export const responseParser = (data) => {
   let dataByDate = {};
 
   for (let i = 0; i < data.list.length; i++) {
-    let day = data.list[i].dt_txt.substring(0, 10);
+    let day = toDate(data.list[i].dt_txt);
     if (!tempsByDate[day]) {
       tempsByDate[day] = [data.list[i].main.temp];
     } else {
@@ -21,7 +27,7 @@ export const responseParser = (data) => {
     if (!dataByDate[day]) {
       dataByDate[day] = [
         data.list[i].weather[0].main,
-        `${api.base}data.list[i].weather[0].icon}.png`,
+        `${api.base}${data.list[i].weather[0].icon.replace("n", "d")}@2x.png`,
       ];
     }
   }
