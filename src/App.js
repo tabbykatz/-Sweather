@@ -1,6 +1,7 @@
 import * as React from "react";
-import { responseParser } from "./helpers";
+
 import Forecast from "./Forecast";
+import { responseParser } from "./helpers";
 
 const api = {
   base: "https://api.openweathermap.org/data/2.5/forecast?q=",
@@ -11,7 +12,6 @@ function App() {
   let [weather, setWeather] = React.useState({});
 
   let shouldDisplayForecast = Object.keys(weather).length > 0;
-  console.log(weather.forecast);
 
   const search = () => {
     fetch(
@@ -22,6 +22,7 @@ function App() {
         setWeather(responseParser(data));
       });
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
     search();
@@ -38,7 +39,8 @@ function App() {
           value={query}
         />
       </form>
-      {shouldDisplayForecast ? <Forecast weather={weather.forecast} /> : null}
+
+      {shouldDisplayForecast ? <Forecast forecast={weather.forecast} /> : null}
     </main>
   );
 }
