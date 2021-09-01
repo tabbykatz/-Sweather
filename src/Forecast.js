@@ -3,10 +3,10 @@ const Forecast = ({ forecast }) => (
     {Object.entries(forecast).map(
       ([date, { temperature, description, icon }]) => (
         <li key={date}>
-          <div>{date}</div>
-          <div>{Math.round(temperature)}°F</div>
-          <div>{description}</div>
-          <img src={icon} alt="weather info" />
+          <div className="date">{date}</div>
+          <div className="temp">{Math.round(temperature)}°F</div>
+          <div className="description">{description}</div>
+          <img src={icon} alt="weather icon" className="icon" />
         </li>
       )
     )}
